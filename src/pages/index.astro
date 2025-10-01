@@ -1,5 +1,8 @@
 ---
-const params = Astro.url.searchParams;
-
-return Astro.redirect(`/api/?${params.toString()}`, 307, { method: 'POST' });
+const queryParams = Astro.url.searchParams;
+const params = queryParams ? `?${queryParams.toString()}` : '';
 ---
+<form method="POST" action={`/api/${params}`} style="display: none;" id="redirectForm" />
+<script>
+    (document.getElementById('redirectForm') as HTMLFormElement)?.submit();
+</script>

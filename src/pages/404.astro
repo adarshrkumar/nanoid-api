@@ -1,0 +1,13 @@
+---
+const url = Astro.url;
+const path = url.pathname;
+const isFile = /\.[^\/]+$/.test(path);
+const endsWithSlash = !isFile && path.endsWith("/");
+if (!endsWithSlash) {
+    return Astro.redirect(path + "/");
+}
+
+const nothing = ['', '', {see:{here:''}}] as [string, string, {see: {here: string}}]
+nothing[2].see.here = 'nothing 2 see here'
+---
+{nothing[2].see.here}

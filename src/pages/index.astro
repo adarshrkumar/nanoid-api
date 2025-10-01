@@ -1,0 +1,5 @@
+---
+const params = Astro.url.searchParams;
+
+return Astro.redirect(`/api/?${params.toString()}`, 307, { method: 'POST' });
+---

@@ -1,43 +1,50 @@
-# Astro Starter Kit: Minimal
+# nanoid-api
 
-```sh
-npm create astro@latest -- --template minimal
+A simple API service for generating unique [nanoid](https://github.com/ai/nanoid) identifiers.
+
+## API Endpoints
+
+### `GET /api` or `POST /api`
+
+Generates a unique nanoid.
+
+**Query Parameters:**
+- `ids` (optional): Comma-separated list of existing IDs to avoid collisions
+
+**Response:**
+```json
+{
+  "id": "V1StGXR8_Z5jdHi6B-myT"
+}
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Example Usage
 
-## 🚀 Project Structure
+```javascript
+// Generate a new ID
+const response = await fetch('/api');
+const { id } = await response.json();
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+// Generate an ID that doesn't collide with existing ones
+const existingIds = ['abc123', 'def456'];
+const response = await fetch(`/api?ids=${existingIds.join(',')}`);
+const { id } = await response.json();
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Tech Stack
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- [Astro](https://astro.build/) with SSR
+- [nanoid](https://github.com/ai/nanoid) for ID generation
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Development
 
-## 🧞 Commands
+```bash
+npm install
+npm run dev
+```
 
-All commands are run from the root of the project, from a terminal:
+## Deployment
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```bash
+npm run build
+```
